@@ -1,0 +1,15 @@
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFF7ED;
+    font-family: "Inter", sans-serif;
+}
+
+header{
+    display: flex;
+    height: 110px;
+    align-items: center;
+    
+}
+
