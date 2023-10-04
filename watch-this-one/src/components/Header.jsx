@@ -13,9 +13,9 @@ export default function Header(){
                 <Link className="site-logo link" to="/" >WatchThisOne</Link>
             </div>
             <div>
-            <Link to="." className="login">
+            <Link to="." className="login link">
                 <span><img src="src/assets/icons/icons8-user-100.png" /></span>
-                <span className="link">Login</span>
+                <span >Login</span>
             </Link>
             </div>
         </header>
