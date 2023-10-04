@@ -1,5 +1,5 @@
 import React from "react";
-import { Await, defer, useLoaderData ,Link} from "react-router-dom";
+import { Await, defer, useLoaderData} from "react-router-dom";
 import { getNowPlayingMovies, getTopMovies } from "../api";
 import Movies from "../components/Movies";
 
