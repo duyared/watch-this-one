@@ -54,7 +54,7 @@ header,header>div,.login{
   transform: scale(1.1);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-}
+
 
 .menu-bar li:last-child {
   margin-right: 0;
