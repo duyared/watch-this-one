@@ -56,3 +56,16 @@ footer {
   .footer-disclaimer p {
     margin: 5px 0;
   }
+
+  .movie-tile img{
+    height: 500px;
+    width:auto
+  }
+
+.movies-container{
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+
+}

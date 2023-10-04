@@ -1,19 +1,22 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import Header from "./components/Header"
-import { BrowserRouter } from "react-router-dom"
+import { RouterProvider,Route,createBrowserRouter,createRoutesFromElements } from "react-router-dom"
 import "./index.css"
 import Layout from "./components/Layout"
+import Home,{loader as homeLoader}from "./pages/Home"
+import Error from "./components/Error"
 
-
+const router = createBrowserRouter(createRoutesFromElements(
+    <Route path="/" element={<Layout />} errorElement={<Error />}>
+        <Route index element={<Home />} loader={homeLoader}/>
+    </Route>
+))
 
 
 
 function App(){
     return (
-        <BrowserRouter>
-            <Layout />
-        </BrowserRouter>
+        <RouterProvider router={router} />
     )
 }
 
