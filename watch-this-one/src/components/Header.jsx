@@ -6,10 +6,18 @@ export default function Header(){
     
     return(
         <header>
-            <section>
-                <img src="src/assets/icons/menu-bars-svgrepo-com.svg" width={20}/>
-            </section>
-            <Link className="site-logo" to="/" >WatchThisOne</Link>
+            <div>
+                <section>
+                    <img className="menu-logo" src="src/assets/icons/menu-bars-svgrepo-com.svg" width={20} color="white"/>
+                </section>
+                <Link className="site-logo link" to="/" >WatchThisOne</Link>
+            </div>
+            <div>
+            <Link to="." className="login">
+                <span><img src="src/assets/icons/icons8-user-100.png" /></span>
+                <span className="link">Login</span>
+            </Link>
+            </div>
         </header>
     )
 }
