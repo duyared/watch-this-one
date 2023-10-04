@@ -1,13 +1,13 @@
 import React from "react";
-import { Await, defer, useLoaderData ,Link} from "react-router-dom";
-import { getMovies,  } from "../api";
+import { Await, defer, useLoaderData ,} from "react-router-dom";
+import { getMovies, } from "../api";
 import Movies from "../components/Movies";
 
 export function loader(){
-    return defer({movies:getMovies("now_playing")})
+    return defer({movies:getMovies("popular")})
 }
 
-export default function Home(){
+export default function Popular(){
     const dataPromise = useLoaderData()
     
     return (

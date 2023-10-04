@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink,Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import MoviesMenu from "./MoviesMenu";
 
 
 export default function Layout() {
@@ -9,6 +10,7 @@ export default function Layout() {
     <div>
         <Header />
         <main>
+            <MoviesMenu />
             <Outlet />
         </main>
         <Footer />
