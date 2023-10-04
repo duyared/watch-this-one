@@ -117,8 +117,8 @@ footer {
     display: flex;
     gap: 20px;
     overflow-x: auto;
-    background-color: rgb(40, 41, 43);
-    /* background-color: white; */
+    /* background-color: rgb(40, 41, 43); */
+    background-color: black;
     height: 500px;  
 }
 .movie-info-container{
