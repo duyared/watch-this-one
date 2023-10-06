@@ -25,6 +25,11 @@ export default function  MoviesMenu (){
             Upcoming
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/discover" >
+            Discover
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

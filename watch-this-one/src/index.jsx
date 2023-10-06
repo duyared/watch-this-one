@@ -8,6 +8,7 @@ import Error from "./components/Error"
 import TopRated,{loader as topRatedLoader} from "./pages/TopRated"
 import Popular ,{loader as popularLoader} from "./pages/Popular"
 import Upcoming,{loader as upcomingLoader} from "./pages/Upcoming"
+import Discover ,{loader as discovorLoader} from "./pages/Discover"
 
 const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<Layout />} errorElement={<Error />}>
@@ -15,6 +16,7 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route path="top_rated" element={<TopRated />} loader={topRatedLoader}/>
         <Route path="popular" element={<Popular />} loader={popularLoader}/>
         <Route path="upcoming" element={<Upcoming />} loader={upcomingLoader}/>
+        <Route path="discover" element={<Discover />} loader={discovorLoader}/>
     </Route>
 ))
 
