@@ -1,35 +1,58 @@
 import React from "react";
 import {Form} from "react-router-dom"
-
-export default function FilterForm(){
-    const [isOpen,setIsOpen] = React.useState(false)
-
-    const toggleDropdown = () =>{
-        setIsOpen(!isOpen)
+import {countries as countriesList}  from "../countries";
+export default function FilterForm({genres,countries}){
+    const [isOpen,setIsOpen] = React.useState({
+        genre:false,
+        country:false,
+        year:false,
+        sort:false
+    })
+    console.log(genres)
+    const toggleDropdown = (dropdown) =>{
+        setIsOpen((prevIsOpen) =>({
+            ...prevIsOpen,
+            [dropdown]:!isOpen[dropdown]
+        }));
     }
-
     return(
         <Form method="get" action="">
             <div className="select-wrapper">
 
-            <button className="dropdownToggle" onClick={toggleDropdown} >Genre </button>
-            {isOpen && (
+            <button className="dropdownToggle" onClick={() =>toggleDropdown("genre")} >Genre </button>
+            {isOpen.genre && (
                 
                 <div className={`select-dropdown ${isOpen && 'open'}`}>
-                <label>
-                    <input type="checkbox" name="genre" value="comedy"/>{" "}
-                Comedy
-                </label>
-                <label>
-                    <input type="checkbox" name="genre" value="action"/>{" "}
-                Action
-                </label>
-                <label>
-                    <input type="checkbox" name="genre" value="horror"/>{" "}
-                Horror
-                </label>
+                {genres.map(genre =>(
+                    <label id={genre.id}>
+                     <input type="checkbox" name="genre" value={genre.name}/>{" "}
+                 {genre.name}
+                 </label>
+                )
+
+                )}
+            </div>
+            
+
+            )}
+           
+            <button className="dropdownToggle" onClick={()=>toggleDropdown("country")} >Country </button>
+            {isOpen.country && (
+                
+                <div className={`select-dropdown ${isOpen.country && 'open'}`}>
+                {countries.map(country =>(
+                    countriesList.countries.includes(country.english_name) &&
+                    (<label id={country.id}>
+                     <input type="checkbox" name="country" value={country.english_name}/>{" "}
+                 {country.english_name}
+                 </label>)
+                )
+
+                )}
             </div>
             )}
+
+            {/* )} */}
             </div>
             {/* <select name="genre" multiple>
                 <option value='comedy'>comedy</option>

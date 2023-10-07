@@ -169,15 +169,16 @@ footer {
   position: absolute;
   top:100%;
   left:0;
-  width: 200px;
+  width: 350px;
   padding: 8px;
   background-color: rgba(27, 28, 29, 0.788);
   border: 1px solid #cccccc79;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);;
+  box-shadow: 0 2px 4px rgba(122, 72, 72, 0.1);;
   visibility: hidden;
   opacity: 0;
   display:flex;
   flex-wrap: wrap;
+  align-items: center;
   border-radius: 5px 5px;
 
 }
@@ -189,11 +190,12 @@ footer {
 label{
   display: block;
   margin-bottom:8px;
+  /* width:90px; */
 }
 
 .select-dropdown label{
-  color:white;
-  font-size: 12px;
+  color:#e0dada;
+  font-size: 13px;
   margin-right:  8px;
 
 }
