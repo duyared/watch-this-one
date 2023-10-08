@@ -76,11 +76,12 @@ header,header>div,.login{
 footer {
     background-color: black;
     color: #fff;
-    padding: 20px 0;
+    padding: 5px 0;
     margin-top: auto; /* Push the footer to the bottom */
     position: fixed;
     bottom: 0;
     width: 100%;
+    height: fit-content;
   }
   
   
@@ -155,9 +156,14 @@ footer {
 .select-wrapper{
   position: relative;
   display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 2px 10px;
+
 }
 
-.dropdownToggle{
+.dropdownToggle,.filter-button{
   padding: 8px 16px;
   background-color: white;
   border: none;
@@ -187,10 +193,10 @@ footer {
   opacity: 1;
 }
 
-label{
+label,option{
   display: block;
   margin-bottom:8px;
-  /* width:90px; */
+  width:100px;
 }
 
 .select-dropdown label{
@@ -205,4 +211,19 @@ label{
 .select-dropdown input[type="checkbox"]:checked + label {
   /* Styles for the selected checkbox label */
   color:red;
+}
+
+.filter-button{
+  background-color: black;
+  color:white;
+  border:1px solid white;
+  border-radius: 5px;
+}
+
+.sort option{
+  background-color: rgba(27, 28, 29);
+  opacity: 0;
+  color:#e0dada;
+
+
 }

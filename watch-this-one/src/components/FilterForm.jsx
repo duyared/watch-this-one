@@ -1,20 +1,63 @@
 import React from "react";
 import {Form} from "react-router-dom"
 import {countries as countriesList}  from "../countries";
-export default function FilterForm({genres,countries}){
+
+export default function FilterForm({genres,countries,onFiltersChange}){
     const [isOpen,setIsOpen] = React.useState({
         genre:false,
         country:false,
         year:false,
-        sort:false
     })
-    console.log(genres)
-    const toggleDropdown = (dropdown) =>{
+    const [filters, setFilters] = React.useState({
+        with_genres: [],
+        region: [],
+        year: "",
+        sort_by: "popularity.desc"
+      });
+    const currentYear = new Date().getFullYear()
+    
+    const toggleDropdown = React.useCallback((dropdown) =>{
         setIsOpen((prevIsOpen) =>({
             ...prevIsOpen,
-            [dropdown]:!isOpen[dropdown]
-        }));
+            [dropdown]:!prevIsOpen[dropdown]
+        }))
+    },[setIsOpen]);
+
+    const handleChange = (event) => {
+        const { name, type, value, checked } = event.target;
+        console.log(name,value,filters.with_genres)
+        if (type === "checkbox") {
+          setFilters((prevFilters) => ({
+            ...prevFilters,
+            [name]: checked
+              ? [...(prevFilters[name]), value]
+              : prevFilters[name].filter((item) => item !== value),
+          }));
+        } else if (name === "sort_by") {
+          setFilters((prevFilters) => ({
+            ...prevFilters,
+            sort_by: value,
+          }));
+        } else {
+          setFilters((prevFilters) => ({
+            ...prevFilters,
+            [name]: name === "year" ? parseInt(value) : value,
+          }));
+        }
+      };
+
+      const yearOptions = [] 
+     for (let year = 1990; year <= currentYear; year++) {
+        yearOptions.push(
+
+        (<label id={year}>
+         <input type="radio" name="year" value={year} checked={filters.year === year}
+          onChange={handleChange}/>{" "}
+             {year}
+     </label>))
+        
     }
+
     return(
         <Form method="get" action="">
             <div className="select-wrapper">
@@ -22,28 +65,26 @@ export default function FilterForm({genres,countries}){
             <button className="dropdownToggle" onClick={() =>toggleDropdown("genre")} >Genre </button>
             {isOpen.genre && (
                 
-                <div className={`select-dropdown ${isOpen && 'open'}`}>
+                <div className={`select-dropdown ${isOpen.genre ? 'open':""}`}>
                 {genres.map(genre =>(
                     <label id={genre.id}>
-                     <input type="checkbox" name="genre" value={genre.name}/>{" "}
+                     <input type="checkbox" name="with_genres" value={genre.id} checked={filters.with_genres && filters.with_genres.includes(String(genre.id))} onChange={handleChange}/>{" "}
                  {genre.name}
                  </label>
                 )
 
                 )}
             </div>
-            
-
             )}
            
             <button className="dropdownToggle" onClick={()=>toggleDropdown("country")} >Country </button>
             {isOpen.country && (
                 
-                <div className={`select-dropdown ${isOpen.country && 'open'}`}>
+                <div className={`select-dropdown ${isOpen.country ? 'open':""}`}>
                 {countries.map(country =>(
                     countriesList.countries.includes(country.english_name) &&
                     (<label id={country.id}>
-                     <input type="checkbox" name="country" value={country.english_name}/>{" "}
+                     <input type="checkbox" name="region" value={country.english_name} checked={filters.region && filters.region.includes(country.english_name)} onChange={handleChange}/>{" "}
                  {country.english_name}
                  </label>)
                 )
@@ -51,25 +92,27 @@ export default function FilterForm({genres,countries}){
                 )}
             </div>
             )}
+            <button className="dropdownToggle" onClick={()=>toggleDropdown("year")} >Year </button>
+            {isOpen.year && (
+                
+                <div className={`select-dropdown ${isOpen.year ? 'open': ""}`}>
+                    {yearOptions}
+                 </div>
+            )}
+                <div >
+                 <select name="sort_by" className="dropdownToggle sort" onChange={handleChange}>
+                    <option value="popularity.desc">Popularity</option>
+                    <option value="primary_release_date.desc">Release Date</option>
+                    <option value="vote_average.desc">Rating</option>
+                    <option value="vote-count.desc">Vote Count</option>
+                </select>
+                 </div>
+        
 
             {/* )} */}
+            <button className='filter-button' type="submit" onClick={() => onFiltersChange(filters)}>Filter</button>
             </div>
-            {/* <select name="genre" multiple>
-                <option value='comedy'>comedy</option>
-                <option value='action'>action</option>
-                <option value='horror'>horror</option>
-            </select>
-            <select name="country" multiple>
-                <option value='usa'>USA</option>
-                <option value='England'>England</option>
-                <option value='Ethiopia'>Ethiopia</option>
-            </select>
-            <select name="year" multiple>
-                <option value='2022'>2022</option>
-                <option value='2023'>2023</option>
-                <option value='2021'>2021</option>
-            </select> */}
-            <button type="submit">Search</button>
+            
 
         </Form>
     )
