@@ -8,7 +8,7 @@ export function loader({request}){
     return defer({
         url:request.url,
         genres:getMovieGenre(),
-        countries:getCountries()
+        countries:getCountries(),
     })
 }
 
@@ -21,7 +21,6 @@ export default function Discover(){
         const movies = await DiscoverMovie(queryString);
         setMovies(movies);
     };
-    React.useEffect(handleFiltersChange,[])
       const constructDiscoverQuery = (filters) => {
         const { with_genres, region, year, sort_by } = filters;
       
@@ -40,7 +39,14 @@ export default function Discover(){
       
         return queryString.toString();
       };
-
+    React.useEffect(()=>{
+      handleFiltersChange({
+        region:[],
+        sort_by:"popularity.desc",
+        with_genres:[],
+        year:""
+      })
+    },[])
    
     return (
         <>
@@ -52,7 +58,7 @@ export default function Discover(){
                }
             </Await>
         </React.Suspense>
-        {movies && <Movies movies={movies} type="Movie" />}        
+        {movies ? <Movies movies={movies} type="Movie" /> : <h2>Loading...</h2>}        
         </>
     )
 }
