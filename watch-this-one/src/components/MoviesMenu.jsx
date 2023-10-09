@@ -6,27 +6,27 @@ export default function  MoviesMenu (){
     <nav>
       <ul className="menu-bar">
         <li>
-          <NavLink to="/"  end>
+          <NavLink to="."  end>
             Now Playing
           </NavLink>
         </li>
         <li>
-          <NavLink to="/top_rated">
+          <NavLink to="top_rated">
             Top Rated
           </NavLink>
         </li>
         <li>
-          <NavLink to="/popular" >
+          <NavLink to="popular" >
             Popular
           </NavLink>
         </li>
         <li>
-          <NavLink to="/upcoming" >
+          <NavLink to="upcoming" >
             Upcoming
           </NavLink>
         </li>
         <li>
-          <NavLink to="/discover" >
+          <NavLink to="discover" >
             Discover
           </NavLink>
         </li>

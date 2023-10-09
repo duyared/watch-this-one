@@ -138,7 +138,7 @@ footer {
   font-size: 15px;
 }
 
-.movie-info img{
+.movie-info img,.movie-detail-info img{
   height:12px;
 }
 .movie-title {
@@ -224,6 +224,16 @@ label,option{
   background-color: rgba(27, 28, 29);
   opacity: 0;
   color:#e0dada;
+}
 
-
+/* movie detail page */
+.movie-details-container{
+  display: flex;
+  padding:20px 20px;
+  color: #e0dada;
+}
+.movie-details-container img{
+  max-height: 600px;
+  padding: 20px 20px;
+  border-radius: 10px;
 }
