@@ -9,7 +9,7 @@ export function loader({params} ){
 export default function MovieDetail(){
     const movie = useLoaderData()
     const location = useLocation()
-    const category = location.state.category
+    const category = location.state?.category
     return (
         <>
         <Link

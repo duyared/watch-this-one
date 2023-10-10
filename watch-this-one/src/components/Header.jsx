@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { NavLink,Link } from "react-router-dom";
+import LoginSignUpModal from "./LoginSignUpModal";
 
 export default function Header(){
+    const [isModalOpen,setIsModalOpen] = useState(false)
     
+    const handleModalOpen = () =>{
+        setIsModalOpen(true)
+    }
+
+    const handleModalClose = () =>{
+        setIsModalOpen(false)
+    }
     return(
         <header>
             <div>
@@ -13,10 +22,11 @@ export default function Header(){
                 <Link className="site-logo link" to="/" >WatchThisOne</Link>
             </div>
             <div>
-            <Link to="." className="login link">
+            <Link to="#" className="login link" onClick={handleModalOpen}>
                 <span><img src="/src/assets/icons/icons8-user-100.png" /></span>
                 <span >Login</span>
             </Link>
+            {isModalOpen && <LoginSignUpModal isOpen={isModalOpen} onClose={handleModalClose} /> }
             </div>
         </header>
     )
