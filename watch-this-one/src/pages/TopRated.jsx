@@ -13,7 +13,7 @@ export default function TopRated(){
     return (
         <React.Suspense fallback={<h2>Loading...</h2>}>
             <Await resolve={dataPromise.movies}>
-                {(movies) => <Movies movies={movies} type="Movie"/>}
+                {(movies) => <Movies movies={movies} type="Movie" category="top_rated"/>}
             </Await>
         </React.Suspense>
     )

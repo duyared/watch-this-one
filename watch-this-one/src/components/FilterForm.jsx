@@ -77,21 +77,21 @@ export default function FilterForm({genres,countries,onFiltersChange}){
             </div>
             )}
            
-            <button className="dropdownToggle" onClick={()=>toggleDropdown("country")} >Country </button>
+            {/* <button className="dropdownToggle" onClick={()=>toggleDropdown("country")} >Country </button>
             {isOpen.country && (
                 
                 <div className={`select-dropdown ${isOpen.country ? 'open':""}`}>
                 {countries.map(country =>(
                     countriesList.countries.includes(country.english_name) &&
                     (<label id={country.id}>
-                     <input type="checkbox" name="region" value={country.english_name} checked={filters.region && filters.region.includes(country.english_name)} onChange={handleChange}/>{" "}
+                     <input type="radio" name="region" value={country.english_name} checked={filters.region && filters.region.includes(country.english_name)} onChange={handleChange}/>{" "}
                  {country.english_name}
                  </label>)
                 )
 
                 )}
             </div>
-            )}
+            )} */}
             <button className="dropdownToggle" onClick={()=>toggleDropdown("year")} >Year </button>
             {isOpen.year && (
                 

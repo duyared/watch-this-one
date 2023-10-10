@@ -58,7 +58,7 @@ export default function Discover(){
                }
             </Await>
         </React.Suspense>
-        {movies ? <Movies movies={movies} type="Movie" /> : <h2>Loading...</h2>}        
+        {movies ? <Movies movies={movies} type="Movie" category="discover" /> : <h2>Loading...</h2>}        
         </>
     )
 }
