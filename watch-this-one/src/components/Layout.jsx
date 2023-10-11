@@ -3,13 +3,11 @@ import { NavLink,Navigate,Outlet, redirect, useActionData, useLoaderData, useNav
 import Header from "./Header";
 import Footer from "./Footer";
 import MoviesMenu from "./MoviesMenu";
-import { loginUser } from "../api";
+import { loginUser, registerUser } from "../api";
 
 export async function action({request}){
     const formData = await request.formData()
     const form = formData.get('form')
-    console.log(formData)
-
     const email = formData.get("email")
     const password = formData.get("password")
 
@@ -17,7 +15,8 @@ export async function action({request}){
         try {
             const data = await loginUser({email,password})
             localStorage.setItem("movieToken",data.token)
-            return redirect('/movies')
+
+            return "success"
         } catch (err) {
             return err.message
         }
@@ -29,10 +28,11 @@ export async function action({request}){
             if(password !== confirmPassword){
                 throw new Error("password don't match")
             }
-            return redirect("/movies")
+            const data = await registerUser({email,password,name})
+            localStorage.setItem("movieToken",data.token)
+            return "success"
             
-        } catch (error) {
-            console.log(error.message)
+        } catch (err) {
             return err.message
         }
         
@@ -45,6 +45,7 @@ export async function action({request}){
 export default function Layout() {
     const errorMessage = useActionData()
     const message = useLoaderData()
+    
     return(
     <div>
         <Header message={message} errorMessage={errorMessage}/>

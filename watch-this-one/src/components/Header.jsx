@@ -8,10 +8,12 @@ export default function Header({message,errorMessage}){
     
     const handleModalOpen = () =>{
         setIsModalOpen(true)
+
     }
 
     const handleModalClose = () =>{
         setIsModalOpen(false)
+        console.log(isModalOpen)
     }
     return(
         <header>

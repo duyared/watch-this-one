@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Form, useNavigation } from "react-router-dom";
 
 
@@ -10,12 +10,13 @@ export default function LoginSignUpModal({isOpen,onClose,message,errorMessage}){
     const handleTabChange = (tab) =>{
         setActiveTab(tab);
     }
-
-    const handleFormSubmit = () =>{
-
-    }
-
+    useEffect(() => {
+        if (errorMessage === 'success') {
+          onClose()
+        }
+      }, [errorMessage]);
     return(
+        
         <div className={`modal ${isOpen ? 'open': ''}`}>
             <div className="modal-content">
                 <div className="modal-header">
@@ -45,7 +46,7 @@ export default function LoginSignUpModal({isOpen,onClose,message,errorMessage}){
                                     }</button>
                             </Form>
                         ):(
-                        <Form method="post" className="signup-form">
+                        <Form method="post" className="signup-form" >
                                 <h2>Sign Up</h2>
                                 {message && <h3 className="red">{message}</h3>}
                                 {errorMessage && <h3 className="red">{errorMessage}</h3>}
