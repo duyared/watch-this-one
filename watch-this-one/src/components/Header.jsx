@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { NavLink,Link } from "react-router-dom";
 import LoginSignUpModal from "./LoginSignUpModal";
 
-export default function Header(){
+export default function Header({message,errorMessage}){
     const [isModalOpen,setIsModalOpen] = useState(false)
     
     const handleModalOpen = () =>{
@@ -26,7 +26,7 @@ export default function Header(){
                 <span><img src="/src/assets/icons/icons8-user-100.png" /></span>
                 <span >Login</span>
             </Link>
-            {isModalOpen && <LoginSignUpModal isOpen={isModalOpen} onClose={handleModalClose} /> }
+            {isModalOpen && <LoginSignUpModal isOpen={isModalOpen} onClose={handleModalClose} errorMessage={errorMessage} message={message}/> }
             </div>
         </header>
     )

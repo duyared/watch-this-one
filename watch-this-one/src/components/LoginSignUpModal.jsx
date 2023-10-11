@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, useNavigation } from "react-router-dom";
 
 
 
-export default function LoginSignUpModal({isOpen,onClose}){
+export default function LoginSignUpModal({isOpen,onClose,message,errorMessage}){
     const [activeTab,setActiveTab] = useState('signup')
-    
+    const navigation = useNavigation()
+
     const handleTabChange = (tab) =>{
         setActiveTab(tab);
-        console.log('in handler',tab)
     }
 
     const handleFormSubmit = () =>{
@@ -32,20 +32,33 @@ export default function LoginSignUpModal({isOpen,onClose}){
                     </div>
                     <div className="form-container">
                         {activeTab === 'login' ? (
-                            <Form className="login-form" onSubmit={handleFormSubmit}>
+                            <Form method="post" className="login-form">
                                 <h2>Login</h2>
+                                {message && <h3 className="red">{message}</h3>}
+                                {errorMessage && <h3 className="red">{errorMessage}</h3>}
                                 <input type="email" name="email" placeholder="Email" required />
                                 <input type="password" name="password" placeholder="Password" required />
-                                <button type="submit">Login</button>
+                                <button  disabled={navigation.state === "submitting"} name="form" value="login">
+                                    {navigation.state==="submitting" 
+                                      ? "Logging in ..."
+                                      :"Login"
+                                    }</button>
                             </Form>
                         ):(
-                        <Form className="signup-form" onSubmit={handleFormSubmit}>
+                        <Form method="post" className="signup-form">
                                 <h2>Sign Up</h2>
+                                {message && <h3 className="red">{message}</h3>}
+                                {errorMessage && <h3 className="red">{errorMessage}</h3>}
                                 <input type="text" name="username" placeholder="UserName" required />
                                 <input type="email" name="email" placeholder="Email" required />
                                 <input type="password" name="password" placeholder="Password" required />
                                 <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
-                                <button type="submit">Sign Up</button>
+                                <button  disabled={navigation.state ==="submitting"} name="form" value="signUp">
+                                    {navigation.state ==="submitting" ?
+                                    "Signing in..."
+                                    :"Sign Up"
+                                    }
+                                    </button>
                         </Form>)
                         }
                     </div>

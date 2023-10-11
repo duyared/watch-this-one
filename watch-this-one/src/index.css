@@ -375,7 +375,10 @@ label,option{
   border-radius:5px;
 }
 
-button[type='submit'] {
+.modal-content button[type='submit'] {
   background-color: #000000;
   width:100%;
+}
+.red{
+  color:red;
 }

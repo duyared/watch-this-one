@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { RouterProvider,Route,createBrowserRouter,createRoutesFromElements } from "react-router-dom"
 import "./index.css"
-import Layout from "./components/Layout"
+import Layout ,{action as loginSignUpAction} from "./components/Layout"
 import Home,{loader as homeLoader}from "./pages/Home"
 import Error from "./components/Error"
 import TopRated,{loader as topRatedLoader} from "./pages/TopRated"
@@ -13,7 +13,7 @@ import MoviesLayout from "./components/moviesLayout"
 import MovieDetail ,{loader as movieLoader} from "./pages/MovieDetails"
 
 const router = createBrowserRouter(createRoutesFromElements(
-    <Route path="/" element={<Layout />} errorElement={<Error />}>
+    <Route path="/" element={<Layout />} errorElement={<Error />} action={loginSignUpAction}>
         <Route path="movies" element={<MoviesLayout />}>
             <Route index element={<Home />} loader={homeLoader}/>
             <Route path="top_rated" element={<TopRated />} loader={topRatedLoader}/>

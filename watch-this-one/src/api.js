@@ -1,3 +1,4 @@
+import { json } from "react-router-dom";
 
 
 export async function getMovies(category){
@@ -103,5 +104,22 @@ export async function DiscoverMovie(queryString){
     }
   }
   return data.results
+}
+
+export async function loginUser(creds){
+  const res = await fetch("http://localhost:5000/api/v1/auth/login",
+  {method:"post",
+   headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(creds)})
+  console.log(JSON.stringify(creds))
+  const data = await res.json()
+  if(!res.ok){
+    throw{
+      message: data.msg,
+    }
+  }
+  return data
 }
 
