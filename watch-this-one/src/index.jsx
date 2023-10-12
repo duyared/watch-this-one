@@ -10,7 +10,8 @@ import Popular ,{loader as popularLoader} from "./pages/Popular"
 import Upcoming,{loader as upcomingLoader} from "./pages/Upcoming"
 import Discover ,{loader as discovorLoader, loader} from "./pages/Discover"
 import MoviesLayout from "./components/moviesLayout"
-import MovieDetail ,{loader as movieLoader} from "./pages/MovieDetails"
+import MovieDetail ,{loader as movieLoader,action as movieDetailsAction} from "./pages/MovieDetails"
+import WatchList, {loader as watchListLoader}from "./pages/WatchList"
 
 const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<Layout />} errorElement={<Error />} action={loginSignUpAction}>
@@ -21,7 +22,8 @@ const router = createBrowserRouter(createRoutesFromElements(
             <Route path="upcoming" element={<Upcoming />} loader={upcomingLoader}/>
             <Route path="discover" element={<Discover />} loader={discovorLoader}/>
         </Route>
-        <Route path="movies/:id" element={<MovieDetail />} loader={movieLoader} />
+        <Route path="movies/:id" element={<MovieDetail />} loader={movieLoader} action={movieDetailsAction} />
+        <Route path="watchlist" element={<WatchList />} loader={watchListLoader}/>
     </Route>
 ))
 

@@ -129,7 +129,23 @@ export async function registerUser(creds){
     'Content-Type': 'application/json'
   },
   body: JSON.stringify(creds)})
-  console.log(JSON.stringify(creds))
+  const data = await res.json()
+  if(!res.ok){
+    throw{
+      message: data.msg,
+    }
+  }
+  return data
+}
+export async function addToWatchList(movie,token){
+  const res = await fetch("http://localhost:5000/api/v1/favorites",
+  {method:"post",
+   headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+  body: movie})
+  console.log(JSON.stringify(movie,token))
   const data = await res.json()
   if(!res.ok){
     throw{
@@ -139,3 +155,56 @@ export async function registerUser(creds){
   return data
 }
 
+
+export async function getWatchList(token){
+  const res = await fetch("http://localhost:5000/api/v1/favorites",
+  {method:"get",
+   headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+ })
+  const data = await res.json()
+  if(!res.ok){
+    throw{
+      message: data.msg,
+    }
+  }
+  return data
+}
+
+
+export async function getWatchListMovie(id,token){
+  const res = await fetch(`http://localhost:5000/api/v1/favorites/${id}`,
+  {
+    method:"get",
+   headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+ })
+  const data = await res.json()
+  if(!res.ok){
+    return null;
+
+  }
+  return data
+}
+
+export async function removeWatchListMovie(id,token){
+  const res = await fetch(`http://localhost:5000/api/v1/favorites/${id}`,
+  {
+    method:"delete",
+   headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+ })
+  const data = await res.json()
+  if(!res.ok){
+    throw{
+      message: data.msg,
+    }
+  }
+  return data
+}

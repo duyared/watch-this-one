@@ -382,3 +382,18 @@ label,option{
 .red{
   color:red;
 }
+
+.watchList-button{
+  background-color: rgba(43, 141, 80, 0.63);
+  border: 1px solid white;
+  border-radius: 5px;
+  padding:5px 10px;
+  color:white;
+  cursor: pointer;
+}
+.remove{
+  background-color: red;
+}
+.mini-info > :last-child{
+  margin-left:auto;
+}
