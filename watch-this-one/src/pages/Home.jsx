@@ -11,7 +11,7 @@ export default function Home(){
     const dataPromise = useLoaderData()
     
     return (
-        <React.Suspense fallback={<h2>Loading...</h2>}>
+        <React.Suspense fallback={<h2 className="loading">Loading...</h2>}>
             <Await resolve={dataPromise.movies}>
                 {(movies) => <Movies movies={movies} type="Movie" />}
             </Await>

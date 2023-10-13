@@ -1,5 +1,3 @@
-import { json } from "react-router-dom";
-
 
 export async function getMovies(category){
     
@@ -113,7 +111,6 @@ export async function loginUser(creds){
     'Content-Type': 'application/json'
   },
   body: JSON.stringify(creds)})
-  console.log(JSON.stringify(creds))
   const data = await res.json()
   if(!res.ok){
     throw{
@@ -145,7 +142,6 @@ export async function addToWatchList(movie,token){
     'Authorization': `Bearer ${token}`
   },
   body: movie})
-  console.log(JSON.stringify(movie,token))
   const data = await res.json()
   if(!res.ok){
     throw{

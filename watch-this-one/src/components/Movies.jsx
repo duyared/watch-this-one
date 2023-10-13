@@ -1,12 +1,12 @@
 import React from "react"
 import { Link } from "react-router-dom"
-export default function Movies({movies,type,category}){
+export default function Movies({movies,type,category,menu}){
 
     const renderElements = movies.map(movie =>(
         <div key={movie.id} className="movie-tile ">
             <Link className="link"
               to={`/movies/${movie.id}`}
-              state={{category:category}}
+              state={{category:category,menu:menu}}
               > 
               <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
               <div>

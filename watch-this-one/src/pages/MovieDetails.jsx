@@ -47,9 +47,10 @@ export default function MovieDetail(){
     const dataPromise = useLoaderData()
     const location = useLocation()
     const category = location.state?.category
+    const menu = location.state?.menu
     return (
         <>
-        <React.Suspense fallback={<h2>Loading</h2>}>
+        <React.Suspense fallback={<h2 className="loading">Loading...</h2>}>
             <Await resolve={Promise.all([dataPromise.movie,dataPromise.isFavorite]).then(value => value)}>
                 {(value) =>{
                     const [movie,isFavorite] = value
@@ -57,7 +58,7 @@ export default function MovieDetail(){
                         <>
                         <Link
                         className="back-button"
-                        to={category ? `../${category}` : ".."}
+                        to={menu ? `/${menu}`:(category ? `../${category}` : "..")}
                         relative="path"
             
                     ><span>&#8592;Go back</span></Link>
@@ -73,12 +74,12 @@ export default function MovieDetail(){
                                 <span>{movie.runtime} mins</span>
                                 {isFavorite ?
                         <Form method="DELETE">
-                            <button className="watchList-button remove" type="submit" name="watchListButton" value="remove">Remove from WatchList</button>
+                            <button className="watchList-button remove" type="submit" name="watchListButton" value="remove">Remove from Watchlist</button>
                         </Form>
                         :
                        ( <Form method="post">
                             <input type="hidden" value={JSON.stringify(movie)} name="movie" />
-                            <button className="watchList-button" type="submit" name="watchListButton" value="add">Add to watchList</button>
+                            <button className="watchList-button" type="submit" name="watchListButton" value="add">Add to Watchlist</button>
                         </Form>)
                         }
                             </div>

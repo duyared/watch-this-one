@@ -50,7 +50,7 @@ export default function Discover(){
    
     return (
         <>
-        <React.Suspense fallback={<h2>Loading...</h2>}>
+        <React.Suspense fallback={<h2 className="loading">Loading...</h2>}>
             <Await resolve={Promise.all([dataPromise.genres,dataPromise.countries]).then(value => value)}>
                {(value) => {
                     const [genres,countries] = value

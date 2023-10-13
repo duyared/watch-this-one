@@ -29,7 +29,9 @@ header,header>div,.login{
 
 }
 .menu-logo{
-    filter: invert(100%)
+    filter: invert(100%);
+    cursor: pointer;
+
 
 }
 /* movies-menu */
@@ -106,6 +108,7 @@ footer {
     /* height: 430px; */
     border-radius:10px;
     background-color: rgba(27, 28, 29, 0.788);
+  
   }
   
   .movie-tile:hover {
@@ -156,6 +159,7 @@ footer {
   text-align: center;
   text-transform: uppercase;
   margin: 5px;
+  text-overflow: calc();
 }
 
 /* filter-form */
@@ -287,7 +291,7 @@ label,option{
 
 /* login-signup modal */
 
-.modal {
+.modal ,.side-menu-container{
   display: none;
   position: fixed;
   top: 0;
@@ -298,18 +302,44 @@ label,option{
   z-index: 9999;
 
 }
+.side-menu-container.open{
+  display: flex;
+  position: absolute;
+  top:60px;
+  left: 20px;
 
-.modal.open {
+}
+
+.modal.open{
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.side-menu-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #57575767;
+  padding: 10px 20px;
+  border-radius: 2px;
+  height: fit-content;
+}
+.side-menu-content .link{
+  padding:5px 17px;
+  width:100%;
+  text-align: center;
+}
+.side-menu-content .link:hover{
+  color: red;
+}
+
 .modal-content {
-  background-color: #575757d8;
+  background-color: #575757d2;
   padding: 30px;
   border-radius: 5px;
   max-width: 500px;
+  
 }
 
 .modal-header {
@@ -385,10 +415,11 @@ label,option{
 
 .watchList-button{
   background-color: rgba(43, 141, 80, 0.63);
-  border: 1px solid white;
   border-radius: 5px;
-  padding:5px 10px;
-  color:white;
+  border: none;
+  padding:10px 10px;
+  font-size: 17px;
+  color: wheat;
   cursor: pointer;
 }
 .remove{
@@ -396,4 +427,17 @@ label,option{
 }
 .mini-info > :last-child{
   margin-left:auto;
+}
+
+
+.watchList-title{
+  color: #e0dada;
+  text-align: center;
+
+}
+.loading{
+  color: #e0dada;
+}
+.error-container{
+  color:wheat;
 }

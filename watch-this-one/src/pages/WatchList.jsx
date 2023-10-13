@@ -10,11 +10,11 @@ export async function loader(){
 export default function WatchList(){
     const dataPromise = useLoaderData()
     return (
-        <div>
-        <h1>WatchList</h1>
-        <React.Suspense fallback={<h2>Loading...</h2>}>
+        <div className="watchList-container">
+        <h1 className="watchList-title">Your Watchlist</h1>
+        <React.Suspense fallback={<h2 className="loading">Loading...</h2>}>
             <Await resolve={dataPromise.movies} >
-                {(movies) => <Movies movies={movies} type="Movie" />}
+                {(movies) => <Movies movies={movies} type="Movie" menu="watchlist"/>}
             </Await>
             </React.Suspense>
          </div>

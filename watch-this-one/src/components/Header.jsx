@@ -5,23 +5,40 @@ import LoginSignUpModal from "./LoginSignUpModal";
 
 export default function Header({message,errorMessage}){
     const [isModalOpen,setIsModalOpen] = useState(false)
+    const [isSideMenuOpen,setIsSideMenuOpen] = useState(false)
     
     const handleModalOpen = () =>{
         setIsModalOpen(true)
 
     }
-
     const handleModalClose = () =>{
         setIsModalOpen(false)
-        console.log(isModalOpen)
+    }
+    const handleSideMenu = ()=>{
+        setIsSideMenuOpen(!isSideMenuOpen)
+    }
+
+    const handleSideMenuClose = () =>{
+        setIsSideMenuOpen(false)
     }
     return(
         <header>
             <div>
                 <section>
-                    <img className="menu-logo" src="/src/assets/icons/menu-bars-svgrepo-com.svg" width={20} color="white"/>
+                    <Link to="#" className="sideMenu-link" onClick={handleSideMenu}>
+                        <img className="menu-logo" src="/src/assets/icons/menu-bars-svgrepo-com.svg" width={20} color="white"/>
+                    </Link>
+                    {isSideMenuOpen && (
+                        <div className={`side-menu-container ${isSideMenuOpen ? 'open' :''}`}>
+                            <div className="side-menu-content">
+                            <Link to="/movies" className="link" onClick={handleSideMenuClose}>Movies</Link>
+                            <Link to="/movies" className="link" onClick={handleSideMenuClose}>Tv Shows</Link>
+                            <Link to="/watchlist" className="link" onClick={handleSideMenuClose}>Watchlist</Link>
+                            </div>
+                        </div>
+                    )}
                 </section>
-                <Link className="site-logo link" to="/" >WatchThisOne</Link>
+                <Link className="site-logo link" to="/movies" >WatchThisOne</Link>
             </div>
             <div>
             <Link to="#" className="login link" onClick={handleModalOpen}>
