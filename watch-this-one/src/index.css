@@ -242,19 +242,23 @@ label,option{
   display: flex;
   padding:20px 30px;  
   color: #e0dadaa2;
-  width: fit-content;
+  min-width: 80vw; /* Adjust the value as needed */
+  max-width: 95vw;
+
 }
 .movie-details-container .poster{
   max-height: 500px;
   margin: 20px 20px;
   border-radius: 10px;
 }
+.movie-detail-info{
+  flex:1
+}
 .movie-detail-info,.movie-detail-info pre{
   display: flex;
   flex-direction: column;
   font-size: 22px;
   gap:10px;
-  width: auto;
   overflow-wrap: break-word;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   
@@ -271,6 +275,10 @@ label,option{
   gap: 10px;
   align-items: center;
   padding-bottom: 10px;
+  width: auto;
+}
+.m
+mini-info button:last-child{
 }
 .overView{
   display: flex;

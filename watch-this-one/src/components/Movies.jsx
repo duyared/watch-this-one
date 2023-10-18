@@ -13,11 +13,11 @@ export default function Movies({movies,type,category,menu}){
               <div className="movie-info-container">
                 <div className="movie-info">
                     <span>{type}</span>
-                    <span>{new Date(movie.release_date).getFullYear()}</span>
+                    <span>{new Date(movie.release_date || movie.first_air_date).getFullYear()}</span>
                     <span><img  src="/src/assets/icons/star.png" alt="star-icon"/> {movie.vote_average.toFixed(1)}</span>
                 </div>
               </div>
-                <div className="movie-title">{movie.title}</div>
+                <div className="movie-title">{movie.title || movie.name}</div>
               </div>
               </Link>
 

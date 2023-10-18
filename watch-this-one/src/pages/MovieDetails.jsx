@@ -4,9 +4,7 @@ import { addToWatchList, getMovie, getWatchListMovie, removeWatchListMovie } fro
 
 export function loader({request,params} ){
     const url = request.url
-    console.log(url)
     const type = url.includes('/movie') ? 'movie' : 'tv';
-    console.log(type)
     const token = localStorage.getItem('movieToken')
     const movie = getMovie(type,params.id)
     try {
@@ -101,8 +99,10 @@ export default function MovieDetail(){
                         <div>
                             <div className="mini-info">
                                 <span><img  src="/src/assets/icons/star.png" alt="star-icon"/> {movie.vote_average.toFixed(1)}</span>
-                                <span>{new Date(movie.release_date).getFullYear()}</span>{" "}
-                                <span>{movie.runtime} mins</span>
+                                <span>{new Date(type ==='movie' ? movie.release_date:movie.first_air_date).getFullYear()}</span>{" "}
+                               {type === 'movie' 
+                               ?  ( <span>{movie.runtime} mins</span>)
+                                :( <span>SS {movie.number_of_seasons} EP {movie.last_episode_to_air.episode_number}</span>)}
                                 {isFavorite ?
                         <Form method="DELETE">
                             <button className="watchList-button remove" type="submit" name="watchListButton" value="remove">Remove from Watchlist</button>
@@ -117,10 +117,10 @@ export default function MovieDetail(){
                         <div className="overview">{movie.overview} </div>
                         <div>
                             <pre>
-                                <div>Type:             Movie</div>
+                                <div>Type:             {type}</div>
                                 <div>Country:        {movie.production_countries.map(country=> <span>{country.name}, </span>)}</div>
                                 <div>Genre:           {movie.genres.map(genre => <span>{genre.name}, </span>)}</div>
-                                <div>Release:        {movie.release_date}</div>
+                                <div>Release:        {movie.release_date || movie.first_air_date}</div>
                                 <div>Production:    {movie.production_companies.map(company => <span>{company.name}, </span>)}</div>
                                 <div>Languages:    {movie.spoken_languages.map(language => <span>{language.english_name}, </span>)}</div>
                                 <div>Tags:              {movie.tagline}</div>

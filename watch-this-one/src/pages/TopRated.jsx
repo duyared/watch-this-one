@@ -11,12 +11,11 @@ export function loader({request}){
 
 export default function TopRated(){
     const dataPromise = useLoaderData()
-    const {type} = useOutletContext()
 
     return (
         <React.Suspense fallback={<h2 className="loading">Loading...</h2>}>
             <Await resolve={dataPromise.movies}>
-                {(movies) => <Movies movies={movies} type={type} category="top_rated"/>}
+                {(movies) => <Movies movies={movies} type={dataPromise.type} category="top_rated"/>}
             </Await>
         </React.Suspense>
     )
