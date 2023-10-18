@@ -5,7 +5,6 @@ import MoviesMenu from "./MoviesMenu";
 
 export default function MoviesLayout() {
     const {type} = useOutletContext()
-    console.log(type)
     return(
     <div>
         <main>

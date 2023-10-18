@@ -3,7 +3,7 @@ import { Form, useNavigation } from "react-router-dom";
 
 
 
-export default function LoginSignUpModal({isOpen,onClose,message,errorMessage}){
+export default function LoginSignUpModal({isOpen,onClose,loaderMessage,actionMessage}){
     const [activeTab,setActiveTab] = useState('signup')
     const navigation = useNavigation()
 
@@ -11,10 +11,14 @@ export default function LoginSignUpModal({isOpen,onClose,message,errorMessage}){
         setActiveTab(tab);
     }
     useEffect(() => {
-        if (errorMessage === 'success') {
-          onClose()
-        }
-      }, [errorMessage]);
+        let token = localStorage.getItem('movieToken')
+        if(token)
+            {
+                onClose()
+            }
+    
+      },[isOpen,loaderMessage]);
+    
     return(
         
         <div className={`modal ${isOpen ? 'open': ''}`}>
@@ -35,8 +39,8 @@ export default function LoginSignUpModal({isOpen,onClose,message,errorMessage}){
                         {activeTab === 'login' ? (
                             <Form method="post" className="login-form">
                                 <h2>Login</h2>
-                                {message && <h3 className="red">{message}</h3>}
-                                {errorMessage && <h3 className="red">{errorMessage}</h3>}
+                                {loaderMessage && <h3 className="red">{loaderMessage}</h3>}
+                                {actionMessage && <h3 className="red">{actionMessage}</h3>}
                                 <input type="email" name="email" placeholder="Email" required />
                                 <input type="password" name="password" placeholder="Password" required />
                                 <button  disabled={navigation.state === "submitting"} name="form" value="login">
@@ -48,8 +52,8 @@ export default function LoginSignUpModal({isOpen,onClose,message,errorMessage}){
                         ):(
                         <Form method="post" className="signup-form" >
                                 <h2>Sign Up</h2>
-                                {message && <h3 className="red">{message}</h3>}
-                                {errorMessage && <h3 className="red">{errorMessage}</h3>}
+                                {loaderMessage && <h3 className="red">{loaderMessage}</h3>}
+                                {actionMessage && <h3 className="red">{actionMessage}</h3>}
                                 <input type="text" name="username" placeholder="UserName" required />
                                 <input type="email" name="email" placeholder="Email" required />
                                 <input type="password" name="password" placeholder="Password" required />

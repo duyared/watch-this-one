@@ -7,22 +7,26 @@ import { loginUser, registerUser } from "../api";
 
 export function loader({request}){
     const url = request.url
+    const message = new URL(request.url).searchParams.get('message');
     const type = url.includes('/movie') ? 'movie' : 'tv';
-    console.log(type)
-    return type
+    return {_type:type,message:message}
 }
 export async function action({request}){
     const formData = await request.formData()
     const form = formData.get('form')
     const email = formData.get("email")
     const password = formData.get("password")
+    const redirectPath = new URL(request.url)
+            .searchParams.get("redirectTo")
 
     if(form === "login"){
         try {
             const data = await loginUser({email,password})
             localStorage.setItem("movieToken",data.token)
-
-            return "success"
+            if(redirectPath){
+                return redirect(redirectPath)
+            }
+            return redirect(request.url)
         } catch (err) {
             return err.message
         }
@@ -36,21 +40,18 @@ export async function action({request}){
             }
             const data = await registerUser({email,password,name})
             localStorage.setItem("movieToken",data.token)
-            return "success"
+            
+            return redirect(redirectPath)
             
         } catch (err) {
             return err.message
-        }
-        
+        }     
     }
-
-    
-
 }
 
 export default function Layout() {
-    const errorMessage = useActionData()
-    const _type = useLoaderData()
+    const actionMessage = useActionData()
+    const {_type,message} = useLoaderData()
     const [type,setType] = useState(_type)
     
     const handleTypeChange = (type)=>{
@@ -58,7 +59,7 @@ export default function Layout() {
     }
     return(
     <div>
-        <Header  errorMessage={errorMessage} onChange={handleTypeChange} />
+        <Header  actionMessage={actionMessage} loaderMessage={message} onChange={handleTypeChange} />
         <main>
             <Outlet context={{type}} />
         </main>

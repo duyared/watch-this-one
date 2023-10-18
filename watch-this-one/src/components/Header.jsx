@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { NavLink,Link } from "react-router-dom";
 import LoginSignUpModal from "./LoginSignUpModal";
 
-export default function Header({message,errorMessage,onChange}){
+export default function Header({actionMessage,loaderMessage,onChange}){
     const [isModalOpen,setIsModalOpen] = useState(false)
-    const [isSideMenuOpen,setIsSideMenuOpen] = useState(false)
-    
+    const [isSideMenuOpen,setIsSideMenuOpen] = useState(false)    
+
+    const isLoggedIn = () =>{
+        const isLoggedIn = Boolean(localStorage.getItem('movieToken'))
+        return isLoggedIn
+    }
     const handleModalOpen = () =>{
-        setIsModalOpen(true)
+        !isLoggedIn() && setIsModalOpen(true)
 
     }
     const handleModalClose = () =>{
-        setIsModalOpen(false)
+
+         setIsModalOpen(false)
     }
     const handleSideMenu = ()=>{
         setIsSideMenuOpen(!isSideMenuOpen)
@@ -22,7 +27,17 @@ export default function Header({message,errorMessage,onChange}){
         type && onChange(type)
         setIsSideMenuOpen(false)
     }
-    return(
+    const logout = ()=>{
+        localStorage.removeItem('movieToken')
+    }
+
+    useEffect(() =>{
+        if(loaderMessage && isModalOpen ===false){
+            !isLoggedIn() && handleModalOpen()
+        }
+    },[loaderMessage,actionMessage])
+    return( 
+
         <header>
             <div>
                 <section>
@@ -46,7 +61,11 @@ export default function Header({message,errorMessage,onChange}){
                 <span><img src="/src/assets/icons/icons8-user-100.png" /></span>
                 <span >Login</span>
             </Link>
-            {isModalOpen && <LoginSignUpModal isOpen={isModalOpen} onClose={handleModalClose} errorMessage={errorMessage} message={message}/> }
+            <Link to="#" className="login link" onClick={logout}>
+                <span><img src="/src/assets/icons/icons8-user-100.png" /></span>
+                <span >Logout</span>
+            </Link>
+            {isModalOpen && <LoginSignUpModal isOpen={isModalOpen} onClose={handleModalClose} actionMessage={actionMessage} loaderMessage={loaderMessage}/> }
             </div>
         </header>
     )

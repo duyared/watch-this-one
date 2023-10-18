@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
 export default function  MoviesMenu ({type}){
-  console.log(type)
   return (
     <nav>
       <ul className="menu-bar">

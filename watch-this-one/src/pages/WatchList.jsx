@@ -1,10 +1,12 @@
 
 import React from "react";
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, defer, redirect, useLoaderData } from "react-router-dom";
 import Movies from "../components/Movies";
 import { getWatchList } from "../api";
+import { requireAuth } from "../auth";
+
 export async function loader({request}){
-    const token = localStorage.getItem('movieToken')
+    const token = await requireAuth(request)
     return defer({movies:getWatchList(token)})
 }
 export default function WatchList(){
