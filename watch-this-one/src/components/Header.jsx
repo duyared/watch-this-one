@@ -34,7 +34,7 @@ export default function Header({message,errorMessage,onChange}){
                             <div className="side-menu-content">
                             <Link to="/movie" className="link" onClick={() =>handleSideMenuClose('movie')}>Movies</Link>
                             <Link to="/tv" className="link" onClick={() =>handleSideMenuClose('tv')}>Tv Shows</Link>
-                            <Link to="/watchlist" className="link" onClick={() =>handleSideMenuClose()}>Watchlist</Link>
+                            <Link to="/watchlist" className="link" onClick={() =>handleSideMenuClose('watchlist')}>Watchlist</Link>
                             </div>
                         </div>
                     )}

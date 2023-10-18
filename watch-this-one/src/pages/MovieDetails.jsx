@@ -19,13 +19,22 @@ export function loader({request,params} ){
 
 }
 export async function action({request,params}){
+    const url = request.url
+    const type = url.includes('/movie') ? 'movie' : 'tv';
     const formData = await request.formData()
     const watchListButton =  formData.get('watchListButton')
     const token = localStorage.getItem('movieToken')
 
     if(watchListButton==='add')
-    { 
-        const movie = formData.get("movie")
+    {   
+        let movie = formData.get('movie')
+        if(type ==='tv')
+        {
+            const movieData = JSON.parse(movie)
+            movieData.title = movieData.name
+            movieData.release_date = movieData.first_air_date
+            movie = JSON.stringify(movieData) 
+         }
     try {
         const watchListMovie = await addToWatchList(movie,token)
         console.log(watchListMovie)
@@ -51,6 +60,7 @@ export default function MovieDetail(){
     const category = location.state?.category
     const menu = location.state?.menu
     const type = location.state?.type
+    console.log(type)
     const goBackTo = ()=>{
         let redirectTo;
         if(menu){
@@ -83,6 +93,7 @@ export default function MovieDetail(){
             <Await resolve={Promise.all([dataPromise.movie,dataPromise.isFavorite]).then(value => value)}>
                 {(value) =>{
                     const [movie,isFavorite] = value
+                    movie.type = movie.name ? 'tv' : 'movie'
                     return (
                         <>
                         <Link
@@ -94,15 +105,15 @@ export default function MovieDetail(){
                     <div className="movie-details-container">
                     <img className="poster" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                     <div className="movie-detail-info">
-                        <h2>{movie.original_title}</h2>
+                        <h2>{movie.original_title || movie.name}</h2>
                        
                         <div>
                             <div className="mini-info">
                                 <span><img  src="/src/assets/icons/star.png" alt="star-icon"/> {movie.vote_average.toFixed(1)}</span>
-                                <span>{new Date(type ==='movie' ? movie.release_date:movie.first_air_date).getFullYear()}</span>{" "}
-                               {type === 'movie' 
-                               ?  ( <span>{movie.runtime} mins</span>)
-                                :( <span>SS {movie.number_of_seasons} EP {movie.last_episode_to_air.episode_number}</span>)}
+                                <span>{new Date(movie.type ==='movie' ? movie.release_date:movie.first_air_date).getFullYear()}</span>{" "}
+                               {movie.type === 'movie' 
+                               && ( <span>{movie.runtime} mins</span>)}
+                               { movie.type ==="tv" && ( <span>SS {movie.number_of_seasons} EP {movie.last_episode_to_air.episode_number}</span>)}
                                 {isFavorite ?
                         <Form method="DELETE">
                             <button className="watchList-button remove" type="submit" name="watchListButton" value="remove">Remove from Watchlist</button>
@@ -117,7 +128,7 @@ export default function MovieDetail(){
                         <div className="overview">{movie.overview} </div>
                         <div>
                             <pre>
-                                <div>Type:             {type}</div>
+                                <div>Type:             {movie.type}</div>
                                 <div>Country:        {movie.production_countries.map(country=> <span>{country.name}, </span>)}</div>
                                 <div>Genre:           {movie.genres.map(genre => <span>{genre.name}, </span>)}</div>
                                 <div>Release:        {movie.release_date || movie.first_air_date}</div>
