@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink,Navigate,Outlet, redirect, useActionData, useLoaderData, useNavigation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import MoviesMenu from "./MoviesMenu";
 import { loginUser, registerUser } from "../api";
 
+export function loader({request}){
+    const url = request.url
+    const type = url.includes('/movie') ? 'movie' : 'tv';
+    console.log(type)
+    return type
+}
 export async function action({request}){
     const formData = await request.formData()
     const form = formData.get('form')
@@ -44,13 +50,17 @@ export async function action({request}){
 
 export default function Layout() {
     const errorMessage = useActionData()
-    const message = useLoaderData()
+    const _type = useLoaderData()
+    const [type,setType] = useState(_type)
     
+    const handleTypeChange = (type)=>{
+        setType(type)
+    }
     return(
     <div>
-        <Header message={message} errorMessage={errorMessage}/>
+        <Header  errorMessage={errorMessage} onChange={handleTypeChange} />
         <main>
-            <Outlet />
+            <Outlet context={{type}} />
         </main>
         <Footer />
     </div>)

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { NavLink,Link } from "react-router-dom";
 import LoginSignUpModal from "./LoginSignUpModal";
 
-export default function Header({message,errorMessage}){
+export default function Header({message,errorMessage,onChange}){
     const [isModalOpen,setIsModalOpen] = useState(false)
     const [isSideMenuOpen,setIsSideMenuOpen] = useState(false)
     
@@ -18,7 +18,8 @@ export default function Header({message,errorMessage}){
         setIsSideMenuOpen(!isSideMenuOpen)
     }
 
-    const handleSideMenuClose = () =>{
+    const handleSideMenuClose = (type) =>{
+        type && onChange(type)
         setIsSideMenuOpen(false)
     }
     return(
@@ -31,9 +32,9 @@ export default function Header({message,errorMessage}){
                     {isSideMenuOpen && (
                         <div className={`side-menu-container ${isSideMenuOpen ? 'open' :''}`}>
                             <div className="side-menu-content">
-                            <Link to="/movies" className="link" onClick={handleSideMenuClose}>Movies</Link>
-                            <Link to="/movies" className="link" onClick={handleSideMenuClose}>Tv Shows</Link>
-                            <Link to="/watchlist" className="link" onClick={handleSideMenuClose}>Watchlist</Link>
+                            <Link to="/movie" className="link" onClick={() =>handleSideMenuClose('movie')}>Movies</Link>
+                            <Link to="/tv" className="link" onClick={() =>handleSideMenuClose('tv')}>Tv Shows</Link>
+                            <Link to="/watchlist" className="link" onClick={() =>handleSideMenuClose()}>Watchlist</Link>
                             </div>
                         </div>
                     )}

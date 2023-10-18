@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { RouterProvider,Route,createBrowserRouter,createRoutesFromElements } from "react-router-dom"
 import "./index.css"
-import Layout ,{action as loginSignUpAction} from "./components/Layout"
+import Layout ,{action as loginSignUpAction,loader as layoutLoader} from "./components/Layout"
 import Home,{loader as homeLoader}from "./pages/Home"
 import Error from "./components/Error"
 import TopRated,{loader as topRatedLoader} from "./pages/TopRated"
@@ -14,15 +14,24 @@ import MovieDetail ,{loader as movieLoader,action as movieDetailsAction} from ".
 import WatchList, {loader as watchListLoader}from "./pages/WatchList"
 
 const router = createBrowserRouter(createRoutesFromElements(
-    <Route path="/" element={<Layout />} errorElement={<Error />} action={loginSignUpAction}>
-        <Route path="movies" element={<MoviesLayout />}>
+    <Route path="/" element={<Layout />} errorElement={<Error />} action={loginSignUpAction} loader={layoutLoader}>
+        <Route path="movie" element={<MoviesLayout />}>
             <Route index element={<Home />} loader={homeLoader}/>
             <Route path="top_rated" element={<TopRated />} loader={topRatedLoader}/>
             <Route path="popular" element={<Popular />} loader={popularLoader}/>
             <Route path="upcoming" element={<Upcoming />} loader={upcomingLoader}/>
             <Route path="discover" element={<Discover />} loader={discovorLoader}/>
         </Route>
-        <Route path="movies/:id" element={<MovieDetail />} loader={movieLoader} action={movieDetailsAction} />
+        <Route path="movie/:id" element={<MovieDetail />} loader={movieLoader} action={movieDetailsAction} />
+        <Route path="tv" element={<MoviesLayout />}>
+            <Route index element={<Home />} loader={homeLoader}/>
+            <Route path="top_rated" element={<TopRated />} loader={topRatedLoader}/>
+            <Route path="popular" element={<Popular />} loader={popularLoader}/>
+            <Route path="on_the_air" element={<Upcoming />} loader={upcomingLoader}/>
+            <Route path="discover" element={<Discover />} loader={discovorLoader}/>
+        </Route>
+        <Route path="tv/:id" element={<MovieDetail />} loader={movieLoader} action={movieDetailsAction} />
+
         <Route path="watchlist" element={<WatchList />} loader={watchListLoader}/>
     </Route>
 ))

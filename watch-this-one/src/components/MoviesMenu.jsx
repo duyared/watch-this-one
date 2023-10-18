@@ -1,13 +1,13 @@
 import { NavLink } from 'react-router-dom';
 
-export default function  MoviesMenu (){
-  
+export default function  MoviesMenu ({type}){
+  console.log(type)
   return (
     <nav>
       <ul className="menu-bar">
         <li>
           <NavLink to="."  end>
-            Now Playing
+            {type ==='tv' ?"Airing Today":"Now Playing"}
           </NavLink>
         </li>
         <li>
@@ -21,8 +21,8 @@ export default function  MoviesMenu (){
           </NavLink>
         </li>
         <li>
-          <NavLink to="upcoming" >
-            Upcoming
+          <NavLink to={type==='tv'?'on_the_air':'upcoming'} >
+            {type==='tv'?"On The Air":"Upcoming"}
           </NavLink>
         </li>
         <li>

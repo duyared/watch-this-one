@@ -1,5 +1,5 @@
 
-export async function getMovies(category){
+export async function getMovies(type,category){
     
     const options = {
         method: 'GET',
@@ -9,7 +9,7 @@ export async function getMovies(category){
         }
       };
       
-      const res = await fetch(`https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`, options)
+      const res = await fetch(`https://api.themoviedb.org/3/${type}/${category}?language=en-US&page=1`, options)
       const data = await res.json()
       if(!res.ok){
         throw{
@@ -20,7 +20,7 @@ export async function getMovies(category){
       }
       return data.results
 }
-export async function getMovie(id){
+export async function getMovie(type,id){
     
     const options = {
         method: 'GET',
@@ -30,7 +30,7 @@ export async function getMovie(id){
         }
       };
       
-      const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
+      const res = await fetch(`https://api.themoviedb.org/3/${type}/${id}?language=en-US`, options)
       const data = await res.json()
       if(!res.ok){
         throw{
@@ -83,7 +83,7 @@ export async function getCountries(){
   }
   return data
 }
-export async function DiscoverMovie(queryString){
+export async function DiscoverMovie(queryString,type){
   const options = {
     method: 'GET',
     headers: {
@@ -92,9 +92,9 @@ export async function DiscoverMovie(queryString){
     }
   };
   
-  const res = await fetch(`https://api.themoviedb.org/3/discover/movie?&language=en-US&page=1&${queryString}`, options)
+  const res = await fetch(`https://api.themoviedb.org/3/discover/${type}?&language=en-US&page=1&${queryString}`, options)
   const data = await res.json()
-  if(!res.ok){
+  if(!res.ok){  
     throw{
         message: data.message,
         statusText: res.statusText,

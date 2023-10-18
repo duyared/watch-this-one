@@ -5,10 +5,13 @@ import Movies from "../components/Movies";
 import FilterForm from "../components/FilterForm";
 
 export function loader({request}){
+  const url = request.url
+  const type = url.includes('/movie') ? 'movie' : 'tv';
     return defer({
         url:request.url,
         genres:getMovieGenre(),
         countries:getCountries(),
+        type:type
     })
 }
 
@@ -17,11 +20,10 @@ export default function Discover(){
     const dataPromise = useLoaderData()
     const handleFiltersChange = async (filters) => {
         const queryString = constructDiscoverQuery(filters);
-        console.log(filters,queryString)
-        const movies = await DiscoverMovie(queryString);
+        const movies = await DiscoverMovie(queryString,dataPromise.type);
         setMovies(movies);
     };
-      const constructDiscoverQuery = (filters) => {
+      const constructDiscoverQuery = (filters,type) => {
         const { with_genres, region, year, sort_by } = filters;
       
         const queryString = new URLSearchParams();
@@ -33,7 +35,7 @@ export default function Discover(){
           queryString.append('region', region.join('|'));
         }
         if (year !== '') {
-          queryString.append('primary_release_year', year);
+          queryString.append(type==='movie'? "primary_release_year" : "first_air_date_year", year);
         }
         queryString.append('sort_by', sort_by);
       
@@ -58,7 +60,7 @@ export default function Discover(){
                }
             </Await>
         </React.Suspense>
-        {movies ? <Movies movies={movies} type="Movie" category="discover" /> : <h2>Loading...</h2>}        
+        {movies ? <Movies movies={movies} type={dataPromise.type} category="discover" /> : <h2>Loading...</h2>}        
         </>
     )
 }

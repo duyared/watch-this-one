@@ -2,9 +2,13 @@ import React from "react";
 import { Await, Form, Link, defer, useLoaderData, useLocation } from "react-router-dom";
 import { addToWatchList, getMovie, getWatchListMovie, removeWatchListMovie } from "../api";
 
-export function loader({params} ){
+export function loader({request,params} ){
+    const url = request.url
+    console.log(url)
+    const type = url.includes('/movie') ? 'movie' : 'tv';
+    console.log(type)
     const token = localStorage.getItem('movieToken')
-    const movie = getMovie(params.id)
+    const movie = getMovie(type,params.id)
     try {
         const isFavorite = getWatchListMovie(params.id, token);
         return defer({ movie, isFavorite });
@@ -48,6 +52,33 @@ export default function MovieDetail(){
     const location = useLocation()
     const category = location.state?.category
     const menu = location.state?.menu
+    const type = location.state?.type
+    const goBackTo = ()=>{
+        let redirectTo;
+        if(menu){
+            redirectTo = `/${menu}`
+        }
+        else{
+            if(category){
+                if(type =='tv'){
+                    switch(category){
+                        case 'upcoming':
+                            redirectTo='../on_the_air';
+                            break;
+                        default:
+                            redirectTo=`../${category}`
+                    }
+                }
+                else{
+                    redirectTo = `../${category}`
+                }
+            }
+            else{
+                redirectTo='..'
+            }
+        }
+        return redirectTo
+    }
     return (
         <>
         <React.Suspense fallback={<h2 className="loading">Loading...</h2>}>
@@ -58,7 +89,7 @@ export default function MovieDetail(){
                         <>
                         <Link
                         className="back-button"
-                        to={menu ? `/${menu}`:(category ? `../${category}` : "..")}
+                        to={goBackTo()}
                         relative="path"
             
                     ><span>&#8592;Go back</span></Link>
