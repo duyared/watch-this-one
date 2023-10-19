@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink,Navigate,Outlet, redirect, useActionData, useLoaderData, useNavigation } from "react-router-dom";
+import { NavLink,Navigate,Outlet, redirect, useActionData, useLoaderData, useLocation, useNavigation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import MoviesMenu from "./MoviesMenu";
@@ -18,18 +18,21 @@ export async function action({request}){
     const password = formData.get("password")
     const redirectPath = new URL(request.url)
             .searchParams.get("redirectTo")
-
+    const fullPath = window.location.href;
+    console.log(fullPath)
     if(form === "login"){
         try {
             const data = await loginUser({email,password})
-            localStorage.setItem("movieToken",data.token)
+            const username = data.user.name
+            localStorage.setItem("movieToken",JSON.stringify({token:data.token,username:username}))
             if(redirectPath){
                 return redirect(redirectPath)
             }
-            return redirect(request.url)
+            return redirect(fullPath)
         } catch (err) {
-            return err.message
+            console.log(err)
         }
+        return null
     }
     if(form === "signUp"){
         try {
@@ -39,7 +42,8 @@ export async function action({request}){
                 throw new Error("password don't match")
             }
             const data = await registerUser({email,password,name})
-            localStorage.setItem("movieToken",data.token)
+            const username = data.user.name
+            localStorage.setItem("movieToken",JSON.stringify({token:data.token,username:username}))
             
             return redirect(redirectPath)
             
@@ -53,7 +57,6 @@ export default function Layout() {
     const actionMessage = useActionData()
     const {_type,message} = useLoaderData()
     const [type,setType] = useState(_type)
-    
     const handleTypeChange = (type)=>{
         setType(type)
     }

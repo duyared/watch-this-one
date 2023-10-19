@@ -14,6 +14,7 @@ export default function LoginSignUpModal({isOpen,onClose,loaderMessage,actionMes
         let token = localStorage.getItem('movieToken')
         if(token)
             {
+                console.log('calling onclose')
                 onClose()
             }
     

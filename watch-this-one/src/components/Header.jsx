@@ -6,38 +6,45 @@ import LoginSignUpModal from "./LoginSignUpModal";
 export default function Header({actionMessage,loaderMessage,onChange}){
     const [isModalOpen,setIsModalOpen] = useState(false)
     const [isSideMenuOpen,setIsSideMenuOpen] = useState(false)    
+    const [isLoggedIn,setIsLoggedIn] = useState(Boolean(localStorage.getItem('movieToken')))
 
-    const isLoggedIn = () =>{
-        const isLoggedIn = Boolean(localStorage.getItem('movieToken'))
-        return isLoggedIn
-    }
-    const handleModalOpen = () =>{
-        !isLoggedIn() && setIsModalOpen(true)
+    const handleModalOpen = () =>{ !isLoggedIn && setIsModalOpen(true) }
+    const handleModalClose = () =>{  setIsModalOpen(false)}
 
-    }
-    const handleModalClose = () =>{
-
-         setIsModalOpen(false)
-    }
-    const handleSideMenu = ()=>{
-        setIsSideMenuOpen(!isSideMenuOpen)
-    }
-
+    const handleSideMenu = ()=>{ setIsSideMenuOpen(!isSideMenuOpen)}
     const handleSideMenuClose = (type) =>{
         type && onChange(type)
         setIsSideMenuOpen(false)
     }
+
     const logout = ()=>{
         localStorage.removeItem('movieToken')
+        setIsLoggedIn(false)
     }
 
     useEffect(() =>{
         if(loaderMessage && isModalOpen ===false){
-            !isLoggedIn() && handleModalOpen()
+            !isLoggedIn && handleModalOpen()
         }
-    },[loaderMessage,actionMessage])
-    return( 
+        const username = getUserName()
+        if(username){
+            setIsLoggedIn(true)   
+            setIsModalOpen(false)    
+         }
+        else{
+            setIsLoggedIn(false)
+        }
 
+    
+    },[loaderMessage,actionMessage,localStorage.getItem('movieToken')])
+    
+    const getUserName = () =>{
+        const token = JSON.parse(localStorage.getItem('movieToken'))
+            const username = token?.username
+        return username
+    }
+        return( 
+            
         <header>
             <div>
                 <section>
@@ -57,14 +64,17 @@ export default function Header({actionMessage,loaderMessage,onChange}){
                 <Link className="site-logo link" to="/movies" >WatchThisOne</Link>
             </div>
             <div>
-            <Link to="#" className="login link" onClick={handleModalOpen}>
+            {
+                !isLoggedIn ? 
+                (<Link to="#" className="login link" onClick={handleModalOpen}>
                 <span><img src="/src/assets/icons/icons8-user-100.png" /></span>
                 <span >Login</span>
-            </Link>
-            <Link to="#" className="login link" onClick={logout}>
+            </Link>)
+            :
+            (<Link to="#" className="login link" onClick={logout}>
                 <span><img src="/src/assets/icons/icons8-user-100.png" /></span>
-                <span >Logout</span>
-            </Link>
+                <span >Welcome {getUserName()}</span>
+            </Link>)}
             {isModalOpen && <LoginSignUpModal isOpen={isModalOpen} onClose={handleModalClose} actionMessage={actionMessage} loaderMessage={loaderMessage}/> }
             </div>
         </header>
