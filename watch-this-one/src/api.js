@@ -1,11 +1,13 @@
 
+const tmdbAPIKey = import.meta.env.VITE_TMDB_API_KEY
+
 export async function getMovies(type,category){
     
     const options = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMjA4YjFmNzMzM2YwYjk4OWE0OWQ1YTFjZWQzY2VhMSIsInN1YiI6IjY1MWQwMmY2ZWE4NGM3MDBjYTA5YmVkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IIO10e-H5MyKdJop2wXtSQmcu5mQyouz2WOaTIJZGFc'
+          Authorization: `Bearer ${tmdbAPIKey}` 
         }
       };
       
@@ -26,7 +28,7 @@ export async function getMovie(type,id){
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMjA4YjFmNzMzM2YwYjk4OWE0OWQ1YTFjZWQzY2VhMSIsInN1YiI6IjY1MWQwMmY2ZWE4NGM3MDBjYTA5YmVkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IIO10e-H5MyKdJop2wXtSQmcu5mQyouz2WOaTIJZGFc'
+          Authorization: `Bearer ${tmdbAPIKey}` 
         }
       };
       
@@ -48,7 +50,7 @@ export async function getMovieGenre(){
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMjA4YjFmNzMzM2YwYjk4OWE0OWQ1YTFjZWQzY2VhMSIsInN1YiI6IjY1MWQwMmY2ZWE4NGM3MDBjYTA5YmVkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IIO10e-H5MyKdJop2wXtSQmcu5mQyouz2WOaTIJZGFc'
+      Authorization: `Bearer ${tmdbAPIKey}` 
     }
   };
   
@@ -68,7 +70,7 @@ export async function getCountries(){
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMjA4YjFmNzMzM2YwYjk4OWE0OWQ1YTFjZWQzY2VhMSIsInN1YiI6IjY1MWQwMmY2ZWE4NGM3MDBjYTA5YmVkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IIO10e-H5MyKdJop2wXtSQmcu5mQyouz2WOaTIJZGFc'
+      Authorization: `Bearer ${tmdbAPIKey}` 
     }
   };
   
@@ -88,7 +90,7 @@ export async function DiscoverMovie(queryString,type){
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMjA4YjFmNzMzM2YwYjk4OWE0OWQ1YTFjZWQzY2VhMSIsInN1YiI6IjY1MWQwMmY2ZWE4NGM3MDBjYTA5YmVkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IIO10e-H5MyKdJop2wXtSQmcu5mQyouz2WOaTIJZGFc'
+      Authorization: `Bearer ${tmdbAPIKey}` 
     }
   };
   
