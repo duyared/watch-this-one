@@ -22,6 +22,32 @@ header,header>div,.login{
     filter: invert(100%)
 }
 
+.logoutButton {
+  padding: 10px;
+  border:none;
+  border-radius: 5px;
+  z-index: 9997;
+  position: absolute;
+
+  margin-left:50px;
+  width:100px;
+  display: block;
+  animation: fadeIn 0.3s ease; /* Add animation property */
+
+  cursor: pointer;
+}
+
+.login.lik:hover + .logoutButton {
+  display:block;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 .link{
     text-decoration: none;
@@ -277,9 +303,7 @@ label,option{
   padding-bottom: 10px;
   width: auto;
 }
-.m
-mini-info button:last-child{
-}
+
 .overView{
   display: flex;
 }

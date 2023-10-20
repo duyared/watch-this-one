@@ -7,7 +7,7 @@ export default function Header({actionMessage,loaderMessage,onChange}){
     const [isModalOpen,setIsModalOpen] = useState(false)
     const [isSideMenuOpen,setIsSideMenuOpen] = useState(false)    
     const [isLoggedIn,setIsLoggedIn] = useState(Boolean(localStorage.getItem('movieToken')))
-
+    const [isTriggered,setIsTriggered] = useState(false)
     const handleModalOpen = () =>{ !isLoggedIn && setIsModalOpen(true) }
     const handleModalClose = () =>{  setIsModalOpen(false)}
 
@@ -20,6 +20,11 @@ export default function Header({actionMessage,loaderMessage,onChange}){
     const logout = ()=>{
         localStorage.removeItem('movieToken')
         setIsLoggedIn(false)
+        setIsTriggered(false)
+    }
+
+    const triggerLogout = ()=>{
+        setIsTriggered(!isTriggered)
     }
 
     useEffect(() =>{
@@ -65,16 +70,25 @@ export default function Header({actionMessage,loaderMessage,onChange}){
             </div>
             <div>
             {
-                !isLoggedIn ? 
-                (<Link to="#" className="login link" onClick={handleModalOpen}>
-                <span><img src="/src/assets/icons/icons8-user-100.png" /></span>
-                <span >Login</span>
-            </Link>)
+                isLoggedIn ? 
+                (
+                <div className="logout-container">
+                    <Link to="#" className="login link" onClick={triggerLogout} >
+                    <span><img src="/src/assets/icons/icons8-user-100.png" /></span>
+                    <span >Welcome {getUserName()}</span>
+                    </Link>
+                    {
+                        isTriggered &&
+                   ( <button className="logoutButton" onClick={logout}>Logout</button>)
+                    }
+                </div>
+            )
             :
-            (<Link to="#" className="login link" onClick={logout}>
-                <span><img src="/src/assets/icons/icons8-user-100.png" /></span>
-                <span >Welcome {getUserName()}</span>
-            </Link>)}
+            (<Link to="#" className="login link" onClick={handleModalOpen}>
+            <span><img src="/src/assets/icons/icons8-user-100.png" /></span>
+            <span >Login</span>
+        </Link>)
+            }
             {isModalOpen && <LoginSignUpModal isOpen={isModalOpen} onClose={handleModalClose} actionMessage={actionMessage} loaderMessage={loaderMessage}/> }
             </div>
         </header>
