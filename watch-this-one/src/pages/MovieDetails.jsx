@@ -5,8 +5,9 @@ import { addToWatchList, getMovie, getWatchListMovie, removeWatchListMovie } fro
 export function loader({request,params} ){
     const url = request.url
     const type = url.includes('/movie') ? 'movie' : 'tv';
-    const token = localStorage.getItem('movieToken')
+    const token = JSON.parse(localStorage.getItem("movieToken"))?.token
     const movie = getMovie(type,params.id)
+    console.log(token)
     try {
         const isFavorite = getWatchListMovie(params.id, token);
         return defer({ movie, isFavorite });
@@ -23,7 +24,8 @@ export async function action({request,params}){
     const type = url.includes('/movie') ? 'movie' : 'tv';
     const formData = await request.formData()
     const watchListButton =  formData.get('watchListButton')
-    const token = localStorage.getItem('movieToken')
+    const token = JSON.parse(localStorage.getItem("movieToken"))?.token
+    console.log(token)
 
     if(watchListButton==='add')
     {   

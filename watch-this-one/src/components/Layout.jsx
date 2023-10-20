@@ -48,8 +48,9 @@ export async function action({request}){
             return redirect(redirectPath)
             
         } catch (err) {
-            return err.message
-        }     
+            console.log(err)
+        }  
+        return null   
     }
 }
 
