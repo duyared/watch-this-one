@@ -16,7 +16,8 @@ export default function WatchList(){
         <h1 className="watchList-title">Your Watchlist</h1>
         <React.Suspense fallback={<h2 className="loading">Loading...</h2>}>
             <Await resolve={dataPromise.movies} >
-                {(movies) => <Movies movies={movies}  menu="watchlist"/>}
+                {(movies) =>
+                 movies.length ? <Movies movies={movies}  menu="watchlist"/> :<h2 className="empty-list">No Items!</h2>}
             </Await>
             </React.Suspense>
          </div>

@@ -66,7 +66,7 @@ export default function Header({actionMessage,loaderMessage,onChange}){
                         </div>
                     )}
                 </section>
-                <Link className="site-logo link" to="/movie" >WatchThisOne</Link>
+                <Link className="site-logo link" to="/" >WatchThisOne</Link>
             </div>
             <div>
             {

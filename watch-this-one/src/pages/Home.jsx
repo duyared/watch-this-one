@@ -1,22 +1,20 @@
 import React from "react";
-import { Await, defer, useLoaderData ,Link, useOutletContext} from "react-router-dom";
-import { getMovies,  } from "../api";
+import { Await, defer, useLoaderData, useOutletContext ,} from "react-router-dom";
+import { getMovies, } from "../api";
 import Movies from "../components/Movies";
+import HeroSection from "../components/HeroIntro";
 
 export function loader({request}){
     const url = request.url
     const type = url.includes('/movie') ? 'movie' : 'tv';
-    const category = type === 'movie' ? 'now_playing' : 'airing_today'
-    return defer({movies:getMovies(type,category),type:type})
+    return defer({movies:getMovies(type,"popular"),type:type})
 }
 
 export default function Home(){
     const dataPromise = useLoaderData()
+
+    
     return (
-        <React.Suspense fallback={<h2 className="loading">Loading...</h2>}>
-            <Await resolve={dataPromise.movies}>
-                {(movies) => <Movies movies={movies} type={dataPromise.type} />}
-            </Await>
-        </React.Suspense>
+        <HeroSection />
     )
 }

@@ -4,7 +4,7 @@ import { Form, useNavigation } from "react-router-dom";
 
 
 export default function LoginSignUpModal({isOpen,onClose,loaderMessage,actionMessage}){
-    const [activeTab,setActiveTab] = useState('signup')
+    const [activeTab,setActiveTab] = useState('login')
     const navigation = useNavigation()
 
     const handleTabChange = (tab) =>{

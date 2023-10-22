@@ -62,7 +62,6 @@ export default function MovieDetail(){
     const category = location.state?.category
     const menu = location.state?.menu
     const type = location.state?.type
-    console.log(type)
     const goBackTo = ()=>{
         let redirectTo;
         if(menu){

@@ -296,6 +296,10 @@ label,option{
   padding: 0;
   
 }
+.empty-list{
+  color: rgba(255, 0, 0, 0.486);
+  text-align: center;
+}
 .production-container{
   display: flex;
   align-items: center;
@@ -485,4 +489,62 @@ label,option{
 }
 .error-container{
   color:wheat;
+}
+
+/* hero section of homepage */
+
+.hero-section {
+  position: relative;
+  background-size: cover;
+  background-image: url(assets/images/hero.jpg);
+  background-position: center;
+  flex: 1;
+  height: calc(100vh - 180px);
+
+}
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.623); 
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+.hero-description {
+  font-size: 18px;
+  line-height: 1.2;
+  padding-bottom: 20px;
+}
+
+.get-started-button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  list-style: none;
+  text-decoration: none;
 }
