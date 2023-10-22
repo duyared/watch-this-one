@@ -128,13 +128,13 @@ export default function MovieDetail(){
                         }
                             </div>
                         <div className="overview">{movie.overview} </div>
-                        <div>
+                        <div className="detail-ppties">
                             <pre>
                                 <div>Type:             {movie.type}</div>
                                 <div>Country:        {movie.production_countries.map(country=> <span>{country.name}, </span>)}</div>
                                 <div>Genre:           {movie.genres.map(genre => <span>{genre.name}, </span>)}</div>
                                 <div>Release:        {movie.release_date || movie.first_air_date}</div>
-                                <div>Production:    {movie.production_companies.map(company => <span>{company.name}, </span>)}</div>
+                                <div className="production-container"><div>Production:      </div><div className="production"> {movie.production_companies.map(company => <span>{company.name}, </span>)}</div></div>
                                 <div>Languages:    {movie.spoken_languages.map(language => <span>{language.english_name}, </span>)}</div>
                                 <div>Tags:              {movie.tagline}</div>
                             </pre>

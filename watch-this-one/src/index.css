@@ -295,17 +295,29 @@ label,option{
   padding: 0;
   
 }
+.production-container{
+  display: flex;
+  align-items: center;
+}
+
+.production{
+  display: flex;
+  flex-wrap: wrap;
+}
+
 
 .mini-info{
   display: flex;
   gap: 10px;
   align-items: center;
   padding-bottom: 10px;
-  width: auto;
+  overflow: auto;
+  flex: 1;
 }
 
 .overView{
   display: flex;
+
 }
 .back-button{
   display:inline-block;
