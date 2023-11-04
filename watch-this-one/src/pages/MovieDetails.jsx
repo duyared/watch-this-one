@@ -2,7 +2,7 @@ import React from "react";
 import { Await, Form, Link, defer, useLoaderData, useLocation } from "react-router-dom";
 import { addToWatchList, getMovie, getWatchListMovie, removeWatchListMovie } from "../api";
 import starIcon from "/assets/icons/star.png"
-
+import { requireAuth } from "../auth";
 export function loader({request,params} ){
     const url = request.url
     const type = url.includes('/movie') ? 'movie' : 'tv';
@@ -25,7 +25,7 @@ export async function action({request,params}){
     const type = url.includes('/movie') ? 'movie' : 'tv';
     const formData = await request.formData()
     const watchListButton =  formData.get('watchListButton')
-    const token = JSON.parse(localStorage.getItem("movieToken"))?.token
+    const token = await requireAuth(request)
 
     if(watchListButton==='add')
     {   
