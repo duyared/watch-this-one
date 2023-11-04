@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { NavLink,Navigate,Outlet, redirect, useActionData, useLoaderData, useLocation, useNavigation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-import MoviesMenu from "./MoviesMenu";
 import { loginUser, registerUser } from "../api";
 
 export function loader({request}){
     const url = request.url
     const message = new URL(request.url).searchParams.get('message');
-    const type = url.includes('/movie') ? 'movie' : 'tv';
+    const type = url.includes('/tv') ? 'tv' : 'movie';
     return {_type:type,message:message}
 }
 export async function action({request}){
