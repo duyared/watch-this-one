@@ -496,7 +496,7 @@ label,option{
 .hero-section {
   position: relative;
   background-size: cover;
-  background-image: url(assets/images/hero.jpg);
+  background-image: url(../public/assets/images/hero.jpg);
   background-position: center;
   flex: 1;
   height: calc(100vh - 180px);

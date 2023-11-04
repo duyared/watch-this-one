@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-
+import userIcon from "/assets/icons/icons8-user-100.png"
 import { NavLink,Link } from "react-router-dom";
-import LoginSignUpModal from "./LoginSignUpModal";
+import LoginSignUpModal from "./LoginSignUpModal";  
 
 export default function Header({actionMessage,loaderMessage,onChange}){
     const [isModalOpen,setIsModalOpen] = useState(false)
@@ -74,7 +74,7 @@ export default function Header({actionMessage,loaderMessage,onChange}){
                 (
                 <div className="logout-container">
                     <Link to="#" className="login link" onClick={triggerLogout} >
-                    <span><img src="/src/assets/icons/icons8-user-100.png" /></span>
+                    <span><img src="../assets/icons/icons8-user-100.png" /></span>
                     <span >Welcome {getUserName()}</span>
                     </Link>
                     {
@@ -85,7 +85,7 @@ export default function Header({actionMessage,loaderMessage,onChange}){
             )
             :
             (<Link to="#" className="login link" onClick={handleModalOpen}>
-            <span><img src="/src/assets/icons/icons8-user-100.png" /></span>
+            <span><img src={userIcon} /></span>
             <span >Login</span>
         </Link>)
             }
