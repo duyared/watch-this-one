@@ -8,7 +8,6 @@ export function loader({request,params} ){
     const type = url.includes('/movie') ? 'movie' : 'tv';
     const token = JSON.parse(localStorage.getItem("movieToken"))?.token
     const movie = getMovie(type,params.id)
-    console.log(token)
     try {
         const isFavorite = getWatchListMovie(params.id, token);
         return defer({ movie, isFavorite });
@@ -39,7 +38,6 @@ export async function action({request,params}){
          }
     try {
         const watchListMovie = await addToWatchList(movie,token)
-        console.log(watchListMovie)
         return "success"
     } catch (error) {
         return error.message
@@ -48,7 +46,6 @@ export async function action({request,params}){
     else{
         try {
             const watchListMovie = await removeWatchListMovie(params.id,token)
-            console.log(watchListMovie)
             return "success"
         } catch (error) {
             return error.message

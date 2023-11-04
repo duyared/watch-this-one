@@ -25,7 +25,6 @@ export default function FilterForm({genres,countries,onFiltersChange}){
 
     const handleChange = (event) => {
         const { name, type, value, checked } = event.target;
-        console.log(name,value,filters.with_genres)
         if (type === "checkbox") {
           setFilters((prevFilters) => ({
             ...prevFilters,

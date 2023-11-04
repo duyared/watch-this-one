@@ -6,7 +6,6 @@ import { Form, useNavigation } from "react-router-dom";
 export default function LoginSignUpModal({isOpen,onClose,loaderMessage,actionMessage}){
     const [activeTab,setActiveTab] = useState('login')
     const navigation = useNavigation()
-
     const handleTabChange = (tab) =>{
         setActiveTab(tab);
     }
@@ -14,11 +13,10 @@ export default function LoginSignUpModal({isOpen,onClose,loaderMessage,actionMes
         let token = localStorage.getItem('movieToken')
         if(token)
             {
-                console.log('calling onclose')
                 onClose()
             }
     
-      },[isOpen,loaderMessage]);
+      },[isOpen,loaderMessage,actionMessage]);
     
     return(
         

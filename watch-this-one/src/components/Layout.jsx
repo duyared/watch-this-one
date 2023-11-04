@@ -19,7 +19,6 @@ export async function action({request}){
     const redirectPath = new URL(request.url)
             .searchParams.get("redirectTo")
     const fullPath = window.location.href;
-    console.log(fullPath)
     if(form === "login"){
         try {
             const data = await loginUser({email,password})
@@ -30,9 +29,9 @@ export async function action({request}){
             }
             return redirect(fullPath)
         } catch (err) {
-            console.log(err)
+            return err.message
         }
-        return null
+        // return null
     }
     if(form === "signUp"){
         try {
@@ -48,9 +47,9 @@ export async function action({request}){
             return redirect(redirectPath)
             
         } catch (err) {
-            console.log(err)
+            return err.message
         }  
-        return null   
+        // return null   
     }
 }
 
