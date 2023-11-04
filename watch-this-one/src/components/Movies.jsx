@@ -1,4 +1,5 @@
 import React from "react"
+import starIcon from "/assets/icons/star.png"
 import { Link } from "react-router-dom"
 export default function Movies({movies,type,category,menu}){
     const renderElements = movies.map(movie =>{
@@ -15,7 +16,7 @@ export default function Movies({movies,type,category,menu}){
                 <div className="movie-info">
                     <span>{Type}</span>
                     <span>{new Date(movie.release_date || movie.first_air_date).getFullYear()}</span>
-                    <span><img  src="/src/assets/icons/star.png" alt="star-icon"/> {movie.vote_average.toFixed(1)}</span>
+                    <span><img  src={starIcon} alt="star-icon"/> {movie.vote_average.toFixed(1)}</span>
                 </div>
               </div>
                 <div className="movie-title">{movie.title || movie.name}</div>

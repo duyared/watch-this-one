@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import userIcon from "/assets/icons/icons8-user-100.png"
+import menuIcon from "/assets/icons/menu-bars-svgrepo-com.svg"
 import { NavLink,Link } from "react-router-dom";
 import LoginSignUpModal from "./LoginSignUpModal";  
 
@@ -54,7 +55,7 @@ export default function Header({actionMessage,loaderMessage,onChange}){
             <div>
                 <section>
                     <Link to="#" className="sideMenu-link" onClick={handleSideMenu}>
-                        <img className="menu-logo" src="/src/assets/icons/menu-bars-svgrepo-com.svg" width={20} color="white"/>
+                        <img className="menu-logo" src={menuIcon} width={20} color="white"/>
                     </Link>
                     {isSideMenuOpen && (
                         <div className={`side-menu-container ${isSideMenuOpen ? 'open' :''}`}>
