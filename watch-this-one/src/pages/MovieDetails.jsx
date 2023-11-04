@@ -1,6 +1,7 @@
 import React from "react";
 import { Await, Form, Link, defer, useLoaderData, useLocation } from "react-router-dom";
 import { addToWatchList, getMovie, getWatchListMovie, removeWatchListMovie } from "../api";
+import starIcon from "/assets/icons/star.png"
 
 export function loader({request,params} ){
     const url = request.url
@@ -25,7 +26,6 @@ export async function action({request,params}){
     const formData = await request.formData()
     const watchListButton =  formData.get('watchListButton')
     const token = JSON.parse(localStorage.getItem("movieToken"))?.token
-    console.log(token)
 
     if(watchListButton==='add')
     {   
@@ -110,7 +110,7 @@ export default function MovieDetail(){
                        
                         <div>
                             <div className="mini-info">
-                                <span><img  src="/src/assets/icons/star.png" alt="star-icon"/> {movie.vote_average.toFixed(1)}</span>
+                                <span><img  src={starIcon} alt="star-icon"/> {movie.vote_average.toFixed(1)}</span>
                                 <span>{new Date(movie.type ==='movie' ? movie.release_date:movie.first_air_date).getFullYear()}</span>{" "}
                                {movie.type === 'movie' 
                                && ( <span>{movie.runtime} mins</span>)}
