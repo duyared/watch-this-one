@@ -1,8 +1,8 @@
 
 const tmdbAPIKey = import.meta.env.VITE_TMDB_API_KEY
+const myAPIURL = import.meta.env.VITE_MY_API_URL
 
 export async function getMovies(type,category){
-    
     const options = {
         method: 'GET',
         headers: {
@@ -107,7 +107,7 @@ export async function DiscoverMovie(queryString,type){
 }
 
 export async function loginUser(creds){
-  const res = await fetch("http://localhost:5000/api/v1/auth/login",
+  const res = await fetch(`${myAPIURL}/api/v1/auth/login`,
   {method:"post",
    headers: {
     'Content-Type': 'application/json'
@@ -122,7 +122,8 @@ export async function loginUser(creds){
   return data
 }
 export async function registerUser(creds){
-  const res = await fetch("http://localhost:5000/api/v1/auth/register",
+  console.log(myAPIURL)
+  const res = await fetch(`${myAPIURL}/api/v1/auth/register`,
   {method:"post",
    headers: {
     'Content-Type': 'application/json'
@@ -137,7 +138,7 @@ export async function registerUser(creds){
   return data
 }
 export async function addToWatchList(movie,token){
-  const res = await fetch("http://localhost:5000/api/v1/favorites",
+  const res = await fetch(`${myAPIURL}/api/v1/favorites`,
   {method:"post",
    headers: {
     'Content-Type': 'application/json',
@@ -155,7 +156,7 @@ export async function addToWatchList(movie,token){
 
 
 export async function getWatchList(token){
-  const res = await fetch("http://localhost:5000/api/v1/favorites",
+  const res = await fetch(`${myAPIURL}/api/v1/favorites`,
   {method:"get",
    headers: {
     'Content-Type': 'application/json',
@@ -173,7 +174,7 @@ export async function getWatchList(token){
 
 
 export async function getWatchListMovie(id,token){
-  const res = await fetch(`http://localhost:5000/api/v1/favorites/${id}`,
+  const res = await fetch(`${myAPIURL}/api/v1/favorites/${id}`,
   {
     method:"get",
    headers: {
@@ -190,7 +191,7 @@ export async function getWatchListMovie(id,token){
 }
 
 export async function removeWatchListMovie(id,token){
-  const res = await fetch(`http://localhost:5000/api/v1/favorites/${id}`,
+  const res = await fetch(`${myAPIURL}/api/v1/favorites/${id}`,
   {
     method:"delete",
    headers: {
