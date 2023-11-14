@@ -6,7 +6,7 @@ export async function requireAuth(request) {
 
     if (!token) {
         throw redirect(
-            `/movie?message=You must log in first.&redirectTo=${pathname}`
+            `/?message=You must log in first.&redirectTo=${pathname}`
         )
     }
     return token
